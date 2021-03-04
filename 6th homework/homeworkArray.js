@@ -26,21 +26,20 @@ function filter(numbers,callback){
     return result;
 }
 const cb1=(args)=>args%2===0;
+const numbers=[2,4,6,8,23];
 function some(numbers,callback){
-    let counter=0;
     for(let i=0;i<numbers.length;i++){
-        if(callback(numbers[i])===true){
-            counter++;
+        if(callback(numbers[i])){
+            return true;
         }
     }
-    return counter>0;
+    return false;
 }
 function every(numbers,callback){
-    let counter=0;
-    for(let i=0;i<numbers.length;i++){
-        if(callback(numbers[i])===true){
-            counter++;
+    for(let i=0;i<numbers.length;i++) {
+        if (!callback(numbers[i])) {
+            return false;
         }
     }
-    return counter===numbers.length;
+        return true;
 }
