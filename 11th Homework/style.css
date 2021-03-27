@@ -1,0 +1,30 @@
+.square{
+    background-color: aqua;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 20px;
+}
+.colorfulSquare{
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+button{
+    width: 40px;
+    height: 40px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+button:first-child{
+    margin-left: 0;
+}
+body{
+    display: flex;
+    flex-direction: row;
+}
+.buttons{
+    margin-top: 50%;
+}
