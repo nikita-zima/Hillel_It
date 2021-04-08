@@ -1,13 +1,23 @@
 function parseTime(time){
     return (time < 10) ? "0" + time : time;
 }
-function getTime(){
 
+function getTime(){
     const now=new Date();
+
     const hours=parseTime(now.getHours());
     const minutes=parseTime(now.getMinutes());
     const seconds=parseTime(now.getSeconds());
 
+    const time=setTimeout(function (){
+        getTime();
+    },1000);
+
+    displayTime(hours,minutes,seconds);
+}
+getTime();
+
+function displayTime(hours,minutes,seconds){
     const container=document.createElement("div");
 
     const hPrint=document.createElement("div");
@@ -25,11 +35,6 @@ function getTime(){
     sPrint.innerHTML=seconds;
     container.appendChild(sPrint);
 
-    document.querySelector('body .time').innerHTML=container.innerHTML;
     console.log(`${hours}:${minutes}:${seconds}`);
-    //document.querySelector('body .time').innerHTML=`${hours}:${minutes}:${seconds}`;
-    const time=setTimeout(function (){
-        getTime();
-    },1000)
+    document.querySelector('body .time').innerHTML=container.innerHTML;
 }
-getTime();

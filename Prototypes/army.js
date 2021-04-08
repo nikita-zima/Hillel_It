@@ -20,7 +20,7 @@ Unit.prototype.restore=function (){
 };
 
 Unit.prototype.clone=function (){
-    return copy=new Unit(this.type,this.health,this.maxHealth,this.maxDistance);
+    return new Unit(this.type,this.health,this.maxHealth,this.maxDistance);
 };
 
 function Army(defaultUnits) {
@@ -31,15 +31,21 @@ function Army(defaultUnits) {
 }
 
 Army.prototype.isReadyToMove=function (distance){
-    this.units.forEach(unit=>{
-        return unit.isReadyToMove(distance) !== true;
-    })
+    for(const unit of this.units){
+        if(unit.isReadyToMove(distance)===false){
+            return false;
+        }
+    }
+    return true;
 };
 
 Army.prototype.isReadyToFight=function(){
-    this.units.forEach(unit=>{
-      return unit.isReadyToFight() !== true;
-    })
+    for(const unit of this.units){
+        if(unit.isReadyToFight()===false){
+            return false;
+        }
+    }
+    return true;
 };
 
 Army.prototype.restore=function(){
@@ -49,24 +55,8 @@ Army.prototype.restore=function(){
 };
 
 Army.prototype.getReadyToMoveUnits=function(distance){
-    const ready=[];
-    this.units.forEach(unit=>{
-        if(unit.isReadyToMove(distance)){
-            ready.push(unit);
-        }
-    })
-    return ready;
+    return this.units.filter(unit=>unit.isReadyToMove(distance)===true);
 };
-
-// Army.prototype.getReadyToFightUnits=function(){
-//     const ready=[];
-//     this.units.forEach(unit=>{
-//         if(unit.isReadyToFight()){
-//             ready.push(unit);
-//         }
-//     })
-//     return ready;
-// };
 
 Army.prototype.combineUnits=function(support){
     support.forEach(unit=>{
@@ -80,7 +70,7 @@ Army.prototype.cloneUnit=function(index){
 };
 
 const defaultUnits=[];
-const arrow=new Unit("arrow",100,100, 1000);
+const arrow=new Unit("arrow",100,100, 2000);
 defaultUnits.push(arrow);
 const sword=new Unit("sword",30,100,1000);
 defaultUnits.push(sword);
@@ -88,8 +78,12 @@ const support=new Unit("support",120,200,300);
 defaultUnits.push(support);
 
 // const army=new Army(defaultUnits);
+// const r=army.isReadyToFight();
+// console.log(r);
+// const r1=army.isReadyToMove(350);
+// console.log(r1);
 // console.log(army);
-// const move=army.getReadyToMoveUnits(1000);
+// const move=army.getReadyToMoveUnits(1500);
 // console.log(move);
 // const fight=army.getReadyToFightUnits();
 // console.log(fight);
