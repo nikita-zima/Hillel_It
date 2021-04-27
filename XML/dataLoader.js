@@ -1,4 +1,4 @@
-class dataLoader{
+class DataLoader{
     #url;
 
     constructor(pageNum) {
@@ -13,6 +13,8 @@ class dataLoader{
 
         xhr.onload = () => {
             if (xhr.status !== 200) {
+                button.disabled=true;
+                button.innerText="All data loaded";
                 console.error(new Error(`Loading failed! Status: ${xhr.status}`));
                 return;
             }
@@ -29,7 +31,7 @@ class dataLoader{
     onLoad(data) {}
 }
 
-class printData extends dataLoader{
+class PrintData extends DataLoader{
     constructor(url) {
         super(url);
     }
@@ -63,15 +65,11 @@ const button = new Button("Get data").parse();
 
        increasePageNum();
 
-       const data = new printData(pageNum);
+       const data = new PrintData(pageNum);
 
        setTimeout(()=>{
            data.load();
        },500);
-
-       if(pageNum===34){
-           button.disabled=true;
-       }
    })
 
 document.body.appendChild(button);
