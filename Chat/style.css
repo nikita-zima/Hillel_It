@@ -1,0 +1,16 @@
+.bot{
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+    margin-top: 10px;
+    padding: 10px;
+}
+.user{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 10px;
+    width: 200px;
+}
